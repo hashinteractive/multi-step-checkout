@@ -40,7 +40,14 @@ module.exports = {
         use: [
           'style-loader',
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // only enable hot in development
+              //hmr: process.env.NODE_ENV === 'development',
+              hmr: true,
+              // if hmr does not work, this is a forceful method.
+              //reloadAll: true,
+            },
           },
           { 
             loader: 'css-loader',
@@ -59,6 +66,7 @@ module.exports = {
     open: true,
     clientLogLevel: 'silent',
     contentBase: './client/dist',
+    historyApiFallback: true,
     hot: true,
   },
 }

@@ -4,21 +4,61 @@ const { Schema } = mongoose
 
 const userSchema = new Schema({
   id: Schema.Types.ObjectId,
-  name: String,
-  email: String,
-  password: String,
+  first: {
+    type: String,
+    default: ''
+  },
+  last: {
+    type: String,
+    default: ''
+  },
+  email: {
+    type: String,
+    default: ''
+  },
+  password: {
+    type: String,
+    default: ''
+  },
   address: {
-    route: String,
-    city: String,
-    state: String,
-    zip: Number,
-    phone: Number
+    route: {
+      type: String,
+      default: ''
+    },
+    city: {
+      type: String,
+      default: ''
+    },
+    state: {
+      type: String,
+      default: ''
+    },
+    zip: {
+      type: Number,
+      default: 54321 
+    },
+    phone: {
+      type: Number,
+      default: 5555555555
+    }
   },
   card: {
-    number: Number,
-    expires: Date,
-    cvv: Number,
-    zip: Number
+    number: {
+      type: Number,
+      default: 4111111111111111
+    },
+    expires: {
+      type: Date,
+      default: Date.now
+    },
+    cvv: {
+      type: Number,
+      default: 123
+    },
+    zip: {
+      type: Number,
+      default: 54321
+    }
   }
 })
 
