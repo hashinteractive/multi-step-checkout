@@ -6,15 +6,12 @@ class Signup extends Component{
   constructor(props){
     super(props)
     this.state = {
-      first: '',
-      last: '',
-      email: '',
-      password: ''
+      user: {...props.user}
     }
     this.handleOnChange = this.handleOnChange.bind(this)
   }
   handleOnChange(e){
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [user[e.target.name]]: e.target.value })
   }
   render(){
     return(
@@ -25,13 +22,13 @@ class Signup extends Component{
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
                 First Name
               </label>
-              <input onChange={this.handleOnChange} name="first" value={this.state.first} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" />
+              <input onChange={this.handleOnChange} name="first" value={this.state.user.first} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" />
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                 Last Name
               </label>
-              <input onChange={this.handleOnChange} name="last" value={this.state.last} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe" />
+              <input onChange={this.handleOnChange} name="last" value={this.state.user.last} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe" />
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -39,13 +36,13 @@ class Signup extends Component{
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                 Email
               </label>
-              <input onChange={this.handleOnChange} name="email" value={this.state.email} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" placeholder="Email" />
+              <input onChange={this.handleOnChange} name="email" value={this.state.user.email} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" placeholder="Email" />
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
                 Password
               </label>
-              <input onChange={this.handleOnChange} name="password" value={this.state.password} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" />
+              <input onChange={this.handleOnChange} name="password" value={this.state.user.password} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************" />
               <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
             </div>
           </div>
@@ -56,7 +53,7 @@ class Signup extends Component{
               Checkout
             </Button>
           </Link>
-          <Link onClick={this.props.submit.bind(null, {...this.state} , 'POST')} to="/shipping">
+          <Link onClick={this.props.submit.bind(null, this.state.user, 'POST')} to="/shipping">
             <Button type={'btn-blue'}>
               Shipping
             </Button>

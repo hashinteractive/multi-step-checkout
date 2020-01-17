@@ -12,7 +12,25 @@ class App extends Component{
   constructor(){
     super()
     this.state = {
-      user: {},
+      user: {
+        address: {
+            route: "",
+            city: "",
+            state: "",
+            zip: 54321,
+            phone: 5555555555
+        },
+        card: {
+            number: 4111111111111111,
+            cvv: 123,
+            zip: 54321,
+            expires: "2020-01-16T23:18:49.211Z"
+        },
+        first: "",
+        last: "",
+        email: "",
+        password: ""
+      },
       method: 'POST'
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -30,7 +48,6 @@ class App extends Component{
       const user = {...response}
       this.setState({ user })
     })
-    
   }
   render(){
     return(
@@ -57,7 +74,7 @@ class App extends Component{
                   <Checkout />
                 </Route>
                 <Route exact path="/signup">
-                  <Signup submit={this.handleSubmit} />
+                  <Signup user={this.state.user} submit={this.handleSubmit} />
                 </Route>
                 <Route exact path="/shipping">
                   <h1>Shipping.</h1>
