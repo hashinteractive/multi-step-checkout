@@ -3,11 +3,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
 } from 'react-router-dom'
 import Checkout from './Checkout'
 import Signup from './Signup'
 import Shipping from './Shipping'
+import Payment from './Payment'
 
 class App extends Component{
   constructor(){
@@ -83,7 +84,7 @@ class App extends Component{
                   <Shipping user={this.state.user} submit={this.handleSubmit} />
                 </Route>
                 <Route exact path="/payment">
-                  <h1>Checkout.</h1>
+                  <Payment user={this.state.user} submit={this.handleSubmit} />
                 </Route>
               </Switch>
             </Router>

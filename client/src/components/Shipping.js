@@ -22,6 +22,9 @@ class Shipping extends Component{
   render(){
     return(
       <div className="flex flex-wrap w-full p-12 bg-white rounded shadow-lg">
+        <div className="w-full mb-12">
+          { JSON.stringify(this.state.user) }
+        </div>
         <form className="w-full">
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3">
