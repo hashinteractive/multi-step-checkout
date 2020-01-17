@@ -18,4 +18,17 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.patch('/', async (req, res, next) => {
+  const { body: user } = req
+  console.log(user)
+  try{
+    let updated = await User.findByIdAndUpdate(user._id, user, {new: true})
+    console.log(updated)
+    res.status(200).json(updated)
+  }catch(err){
+    console.log(err)
+    next(err)
+  }
+})
+
 module.exports = router

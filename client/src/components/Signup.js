@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Button from './button/Button'
 
 class Signup extends Component{
@@ -9,9 +9,16 @@ class Signup extends Component{
       user: {...props.user}
     }
     this.handleOnChange = this.handleOnChange.bind(this)
+    this.handleOnSubmit = this.handleOnSubmit.bind(this)
   }
   handleOnChange(e){
-    this.setState({ [user[e.target.name]]: e.target.value })
+    e.persist()
+    this.setState(state => ({ user: { ...state.user, [e.target.name]: e.target.value } }) )
+  }
+  async handleOnSubmit(e){
+    let method = this.state.user._id ? 'PATCH' : 'POST'
+    await this.props.submit(this.state.user, method)
+    this.props.history.push('/shipping')
   }
   render(){
     return(
@@ -53,15 +60,15 @@ class Signup extends Component{
               Checkout
             </Button>
           </Link>
-          <Link onClick={this.props.submit.bind(null, this.state.user, 'POST')} to="/shipping">
+          <span onClick={this.handleOnSubmit}>
             <Button type={'btn-blue'}>
               Shipping
             </Button>
-          </Link>
+          </span>
         </div>
       </div>
     )
   }
 }
 
-export default Signup 
+export default withRouter(Signup) 

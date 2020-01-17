@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import Checkout from './Checkout'
 import Signup from './Signup'
+import Shipping from './Shipping'
 
 class App extends Component{
   constructor(){
@@ -35,18 +36,20 @@ class App extends Component{
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleSubmit(data, method){
-    this.setState({ method }, async () => {
-      let response = await fetch('http://localhost:3333/api/user', {
-        method: this.state.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }).then(res => res.json())
+  handleSubmit(data, method, route){
+    return new Promise((resolve, reject) => {
+      this.setState({ method }, async () => {
+        let response = await fetch('http://localhost:3333/api/user', {
+          method: this.state.method,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }).then(res => res.json())
 
-      const user = {...response}
-      this.setState({ user })
+        const user = {...response}
+        this.setState({ user }, resolve)
+      })
     })
   }
   render(){
@@ -77,7 +80,7 @@ class App extends Component{
                   <Signup user={this.state.user} submit={this.handleSubmit} />
                 </Route>
                 <Route exact path="/shipping">
-                  <h1>Shipping.</h1>
+                  <Shipping user={this.state.user} submit={this.handleSubmit} />
                 </Route>
                 <Route exact path="/payment">
                   <h1>Checkout.</h1>
