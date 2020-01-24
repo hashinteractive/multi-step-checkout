@@ -33,10 +33,8 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        exclude: /\.module\.css$/i,
-        include: [
-          path.resolve(__dirname, "client")
-        ],
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, "client/src"),
         use: [
           'style-loader',
           {
